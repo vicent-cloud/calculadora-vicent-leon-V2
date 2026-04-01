@@ -334,7 +334,7 @@ export default function App() {
                 </div>
               )}
             </div>
-            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Calculadora de inversión y honorarios</h1>
+            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Descubre la inversión real de tu proyecto</h1>
             <p style={{ margin: 0, opacity: 0.85 }}>Calcula de forma orientativa la inversión de obra y los honorarios de interiorismo.</p>
             <div style={{ marginTop: 18, display: "flex", justifyContent: "space-between", fontSize: 14, opacity: 0.85 }}>
               <span>Paso {step + 1} de {steps.length}</span>
