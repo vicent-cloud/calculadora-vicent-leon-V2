@@ -324,7 +324,7 @@ export default function App() {
 
     // 👉 Desde resultado → abrir WhatsApp
     if (step === 4) {
-      const message = `Hola, soy ${form.fullName}. Acabo de completar la calculadora de VICENT LEON Interiorismo y me gustaría comentar mi proyecto.`;
+      const message = `Hola, soy ${form.fullName}. He completado la estimación para mi proyecto de ${selectedProject?.label || ''} (${form.areaM2} m²). Me gustaría comentar contigo el alcance y los siguientes pasos para avanzar.`;
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
       window.location.href = url;
@@ -348,8 +348,8 @@ export default function App() {
                 </div>
               )}
             </div>
-            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Calculadora de inversión y honorarios</h1>
-            <p style={{ margin: 0, opacity: 0.85 }}>Calcula de forma orientativa la inversión de obra y los honorarios de interiorismo.</p>
+            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Descubre la inversión de tu proyecto de interiorismo</h1>
+            <p style={{ margin: 0, opacity: 0.85 }}>Una estimación clara y honesta para entender la inversión real de tu proyecto antes de empezar.</p>
             <div style={{ marginTop: 18, display: "flex", justifyContent: "space-between", fontSize: 14, opacity: 0.85 }}>
               <span>Paso {step + 1} de {steps.length}</span>
               <span>{steps[step]}</span>
@@ -362,7 +362,7 @@ export default function App() {
           <div style={{ padding: 24 }}>
             {step === 0 && (
               <div>
-                <h2 style={{ marginTop: 0 }}>Cuéntanos qué tipo de proyecto tienes</h2>
+                <h2 style={{ marginTop: 0 }}>Empecemos por entender tu proyecto</h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 12, marginBottom: 20 }}>
                   {PROJECT_TYPES.map((item) => {
                     const active = form.projectType === item.value;
@@ -433,7 +433,7 @@ export default function App() {
 
             {step === 1 && (
               <div>
-                <h2 style={{ marginTop: 0 }}>Define el alcance del servicio</h2>
+                <h2 style={{ marginTop: 0 }}>Define cómo quieres vivir este proceso</h2>
                 <SelectField
                   label="Nivel de servicio"
                   value={form.serviceLevel}
@@ -464,7 +464,7 @@ export default function App() {
 
             {step === 2 && (
               <div>
-                <h2 style={{ marginTop: 0 }}>Complejidad del proyecto</h2>
+                <h2 style={{ marginTop: 0 }}>Afinemos los detalles de tu proyecto</h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
                   <SelectField label="Cambios de distribución o demolición" value={form.structuralChanges} onChange={(value) => update("structuralChanges", value)} options={[{ value: "no", label: "No" }, { value: "leves", label: "Leves" }, { value: "importantes", label: "Importantes" }]} />
                   <SelectField label="Intervención en zonas húmedas" value={form.wetAreas} onChange={(value) => update("wetAreas", value)} options={[{ value: "no", label: "No" }, { value: "una", label: "1 zona húmeda" }, { value: "dos_mas", label: "2 o más zonas húmedas" }]} />
@@ -476,7 +476,7 @@ export default function App() {
 
             {step === 3 && (
               <div>
-                <h2 style={{ marginTop: 0 }}>Recibe tu estimación</h2>
+                <h2 style={{ marginTop: 0 }}>Accede a tu estimación personalizada</h2>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
                   <div>
                     <label style={labelStyle()}>Nombre</label>
@@ -505,23 +505,23 @@ export default function App() {
 
             {step === 4 && calculation && (
               <div>
-                <h2 style={{ marginTop: 0 }}>Tu estimación orientativa</h2>
-                <p style={{ color: "#475569" }}>Este resultado no es un presupuesto cerrado. Es una estimación razonada que separa inversión de obra y honorarios de interiorismo.</p>
+                <h2 style={{ marginTop: 0 }}>Tu inversión estimada</h2>
+                <p style={{ color: "#475569" }}>Esta estimación no es un presupuesto cerrado, sino una base sólida para tomar decisiones con claridad. Una buena preparación y gestión marcan la diferencia en el resultado final de tu proyecto.</p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 16 }}>
                   <div style={cardStyle(true)}>
-                    <div style={{ fontSize: 14, color: "#64748b" }}>Inversión estimada de obra</div>
+                    <div style={{ fontSize: 14, color: "#64748b" }}>Inversión estimada en obra</div>
                     <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700, color: BRAND.navy }}>
                       {euro(calculation.workRange.min)} - {euro(calculation.workRange.max)}
                     </div>
                   </div>
                   <div style={cardStyle(true)}>
-                    <div style={{ fontSize: 14, color: "#64748b" }}>Honorarios estimados</div>
+                    <div style={{ fontSize: 14, color: "#64748b" }}>Honorarios de interiorismo</div>
                     <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700, color: "#002654" }}>
                       {euro(calculation.feesRange.min)} - {euro(calculation.feesRange.max)}
                     </div>
                   </div>
                   <div style={{ ...cardStyle(true), gridColumn: "1 / -1", background: BRAND.navy, color: "#fff" }}>
-                    <div style={{ fontSize: 14, opacity: 0.8 }}>Total estimado proyecto + obra</div>
+                    <div style={{ fontSize: 14, opacity: 0.8 }}>Inversión total estimada</div>
                     <div style={{ marginTop: 12, fontSize: 32, fontWeight: 700 }}>
                       {euro(calculation.globalRange.min)} - {euro(calculation.globalRange.max)}
                     </div>
@@ -547,7 +547,7 @@ export default function App() {
               <button
                 type="button"
                 onClick={handleNext}
-                disabled={step === steps.length - 1 || !canContinue()}
+                disabled={!canContinue() && step !== 4}
                 style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "#002654", color: "#fff", cursor: "pointer", opacity: step === steps.length - 1 || !canContinue() ? 0.5 : 1 }}
               >
                 {isSubmitting ? "Guardando..." : step === 3 ? "Ver resultado" : step === 4 ? "Hablar por WhatsApp" : "Continuar"}
