@@ -104,6 +104,7 @@ const initialForm = {
 const steps = ["Proyecto", "Alcance", "Complejidad", "Contacto", "Resultado"];
 
 const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbydnvW705iPiAs-I1K9jCaeSUaWnAfiUJR_dg5-a_w0sPLozTWGiP4FHZb6-LXX_jg5Gw/exec";
+const WHATSAPP_NUMBER = "34622295710"; 
 const LOGO_URL = "";
 const BRAND = {
   navy: "#002654",
@@ -315,6 +316,13 @@ export default function App() {
     if (step === 3) {
       const success = await submitLead();
       if (!success) return;
+
+      // 👉 Redirección a WhatsApp con mensaje automático
+      const message = `Hola, soy ${form.fullName}. Acabo de completar la calculadora de VICENT LEON Interiorismo y me gustaría comentar mi proyecto.`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+      window.location.href = url;
+      return;
     }
 
     setStep((s) => Math.min(s + 1, steps.length - 1));
@@ -334,7 +342,7 @@ export default function App() {
                 </div>
               )}
             </div>
-            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Descubre la inversión real de tu proyecto</h1>
+            <h1 style={{ margin: "16px 0 8px", fontSize: 30 }}>Calculadora de inversión y honorarios</h1>
             <p style={{ margin: 0, opacity: 0.85 }}>Calcula de forma orientativa la inversión de obra y los honorarios de interiorismo.</p>
             <div style={{ marginTop: 18, display: "flex", justifyContent: "space-between", fontSize: 14, opacity: 0.85 }}>
               <span>Paso {step + 1} de {steps.length}</span>
@@ -502,7 +510,7 @@ export default function App() {
                   </div>
                   <div style={cardStyle(true)}>
                     <div style={{ fontSize: 14, color: "#64748b" }}>Honorarios estimados</div>
-                    <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700, color: BRAND.navy }}>
+                    <div style={{ marginTop: 12, fontSize: 28, fontWeight: 700, color: "#002654" }}>
                       {euro(calculation.feesRange.min)} - {euro(calculation.feesRange.max)}
                     </div>
                   </div>
@@ -534,9 +542,9 @@ export default function App() {
                 type="button"
                 onClick={handleNext}
                 disabled={step === steps.length - 1 || !canContinue()}
-                style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: BRAND.navy, color: "#fff", cursor: "pointer", opacity: step === steps.length - 1 || !canContinue() ? 0.5 : 1 }}
+                style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "#002654", color: "#fff", cursor: "pointer", opacity: step === steps.length - 1 || !canContinue() ? 0.5 : 1 }}
               >
-                {isSubmitting ? "Guardando..." : step === steps.length - 2 ? "Ver resultado" : "Continuar"}
+                {isSubmitting ? "Guardando..." : step === steps.length - 2 ? "Recibir por WhatsApp" : "Continuar"}
               </button>
             </div>
           </div>
