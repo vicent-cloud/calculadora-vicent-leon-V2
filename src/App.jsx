@@ -548,7 +548,7 @@ export default function App() {
                 type="button"
                 onClick={handleNext}
                 disabled={!canContinue() && step !== 4}
-                style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "#002654", color: "#fff", cursor: "pointer", opacity: step === steps.length - 1 || !canContinue() ? 0.5 : 1 }}
+                style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "#002654", color: "#fff", cursor: "pointer", opacity: (!canContinue() && step !== 4) ? 0.5 : 1 }}
               >
                 {isSubmitting ? "Guardando..." : step === 3 ? "Ver resultado" : step === 4 ? "Hablar por WhatsApp" : "Continuar"}
               </button>
