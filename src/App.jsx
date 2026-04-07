@@ -104,7 +104,7 @@ const initialForm = {
 const steps = ["Proyecto", "Alcance", "Complejidad", "Contacto", "Resultado"];
 
 const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbydnvW705iPiAs-I1K9jCaeSUaWnAfiUJR_dg5-a_w0sPLozTWGiP4FHZb6-LXX_jg5Gw/exec";
-const WHATSAPP_NUMBER = "34622295710"; 
+const WHATSAPP_NUMBER = "34622295710"; // 👉 Sustituye por tu número (formato internacional sin +)
 const LOGO_URL = "";
 const BRAND = {
   navy: "#002654",
@@ -317,7 +317,13 @@ export default function App() {
       const success = await submitLead();
       if (!success) return;
 
-      // 👉 Redirección a WhatsApp con mensaje automático
+      // 👉 Ir al resultado primero
+      setStep(4);
+      return;
+    }
+
+    // 👉 Desde resultado → abrir WhatsApp
+    if (step === 4) {
       const message = `Hola, soy ${form.fullName}. Acabo de completar la calculadora de VICENT LEON Interiorismo y me gustaría comentar mi proyecto.`;
       const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
@@ -544,7 +550,7 @@ export default function App() {
                 disabled={step === steps.length - 1 || !canContinue()}
                 style={{ padding: "12px 18px", borderRadius: 14, border: "none", background: "#002654", color: "#fff", cursor: "pointer", opacity: step === steps.length - 1 || !canContinue() ? 0.5 : 1 }}
               >
-                {isSubmitting ? "Guardando..." : step === steps.length - 2 ? "Recibir por WhatsApp" : "Continuar"}
+                {isSubmitting ? "Guardando..." : step === 3 ? "Ver resultado" : step === 4 ? "Hablar por WhatsApp" : "Continuar"}
               </button>
             </div>
           </div>
