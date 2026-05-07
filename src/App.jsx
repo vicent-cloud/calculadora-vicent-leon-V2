@@ -493,8 +493,18 @@ export default function App() {
                 </div>
                 <label style={{ ...cardStyle(false), display: "flex", gap: 10, marginTop: 16, padding: 16 }}>
                   <input type="checkbox" checked={form.consent} onChange={(e) => update("consent", e.target.checked)} />
-                  <span style={{ fontSize: 14 }}>Acepto la política de privacidad y autorizo el uso de mis datos para recibir la estimación y el contacto comercial.</span>
-                </label>
+<span style={{ fontSize: 14 }}>
+  Acepto la{" "}
+  <a
+    href="https://www.vicentleon.com/politica-privacidad"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ textDecoration: "underline" }}
+  >
+    política de privacidad
+  </a>{" "}
+  y autorizo el uso de mis datos para recibir la estimación y el contacto comercial.
+</span>                </label>
                 {submitError ? (
                   <div style={{ marginTop: 12, color: "#991b1b", background: "#fef2f2", border: "1px solid #fecaca", borderRadius: 12, padding: 12, fontSize: 14 }}>
                     {submitError}
